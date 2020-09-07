@@ -6,5 +6,38 @@
 </head>
 <body>
 	<h1 th:text="${title}">Bookstore</h1>
+	
+	<h2>Book inventory</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Title</th>
+				<th>Year</th>
+				<th>ISBN</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book: ${bookList}">
+				<td th:text="${book.id}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.year}"></td>
+				<td th:text="${book.isbn}"></td>
+				<td th:text="${book.price}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>Add a book</h2>
+	<form action="#" method="post" th:action="@{/index}" th:object="${book}">
+		<p>Id: <input type="text" th:field="*{id}" /></p>
+		<p>Title: <input type="text" th:field="*{title}" /></p>
+		<p>Year: <input type="number" th:field="*{year}" /></p>
+		<p>ISBN: <input type="text" th:field="*{isbn}" /></p>
+		<p>Price: <input type="text" th:field="*{price}" /></p>
+		<p><input type="submit" value="Save" /></p>
+	</form>
+	
 </body>
 </html>
