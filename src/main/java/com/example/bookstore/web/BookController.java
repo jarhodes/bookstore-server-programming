@@ -36,22 +36,6 @@ public class BookController {
 		
 	}
 	
-	@PostMapping("/addbook")
-	public String addBookAction(Book book) {
-		
-		repository.save(book);
-		return "redirect:/booklist";
-		
-	}
-	
-	@GetMapping("/delete/{id}")
-	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
-
-		repository.deleteById(bookId);
-		return "redirect:/booklist";
-	
-	}
-	
 	@GetMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		
@@ -63,12 +47,20 @@ public class BookController {
 		
 	}
 	
-	@PostMapping("/edit/{id}")
-	public String updateBook(@PathVariable("id") Long bookId, Book book) {
+	@GetMapping("/delete/{id}")
+	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
+
+		repository.deleteById(bookId);
+		return "redirect:/booklist";
+	
+	}
+	
+	@PostMapping("/save")
+	public String saveBook(Book book) {
 		
-		book.setId(bookId);
 		repository.save(book);
 		return "redirect:/booklist";
+		
 	}
 	
 }
