@@ -31,13 +31,13 @@ public class BookController {
 		return "booklist";
 	}
 	
-	@GetMapping("/api/books")
+	@GetMapping("/books")
 	public @ResponseBody List<Book> bookListRest() {
 		List<Book> bookList = (List<Book>) repository.findAll();
 		return bookList;
 	}
 	
-	@GetMapping("/api/book/{id}")
+	@GetMapping("/book/{id}")
 	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
 		return repository.findById(bookId);
 	}
