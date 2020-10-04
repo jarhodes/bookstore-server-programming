@@ -9,6 +9,12 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
+	<div style="float: right; margin: 1em;">
+		<p>[[${#httpServletRequest.remoteUser}]]</p>
+    	<form th:action="@{/logout}" method="post">
+    		<button type="submit" class="btn btn-danger">Log out</button>
+    	</form>
+	</div>
 	<h1>Jonathan's book store</h1>
 	<h2>Inventory</h2>
     <table class="table table-striped">
@@ -20,6 +26,7 @@
 			    <th>Price</th>
 			    <th>Category</th>
 			    <th></th>
+			    <th sec:authorize="hasAuthority('ADMIN')"></th>
 			</tr>
 		</thead>
 		<tbody>  
@@ -30,7 +37,9 @@
 	    		<td th:text="${book.price}"></td>
 	    		<td th:text="${book.category.name}"></td>
 	    		<td>
-	    			<a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}" role="button">Edit</a> 
+	    			<a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}" role="button">Edit</a>
+	    		</td>
+	    		<td sec:authorize="hasAuthority('ADMIN')">
 	    			<a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}" role="button" onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
 	    		</td>    		
 	    	</tr>
